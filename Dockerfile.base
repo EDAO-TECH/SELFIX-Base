@@ -1,5 +1,39 @@
+# Recreate and output the full updated scripts for Dockerfile.base, build_docker_images.sh, and README.md with the badge
+
+dockerfile_base = """
+# Dockerfile.base
 FROM python:3.11-slim
+
 WORKDIR /opt/selfix
+
 COPY . .
+
 RUN pip install --no-cache-dir -r requirements.txt
+
 CMD ["python3", "license_validator.py"]
+"""
+
+build_docker_images = """
+#!/bin/bash
+
+TIERS=("HomeGuard" "ProSecure" "TrustShield" "PartnerX")
+
+for TIER in "${TIERS[@]}"; do
+  echo "🔨 Building Docker image for tier: $TIER"
+  docker build -f Dockerfile.base -t edaotech/selfix-$TIER --build-arg TIER=$TIER .
+done
+"""
+
+readme_md = """
+# SELFIX Base
+
+![Build](https://github.com/EDAO-TECH/SELFIX-Base/actions/workflows/docker-build.yml/badge.svg)
+
+SELFIX is a modular, secure AI-powered rollback, self-healing, and trust-verification platform with DAO-compliant licensing.
+
+## 🐳 Dockerized Tiered Builds
+
+To build all commercial editions:
+
+```bash
+./build_docker_images.sh

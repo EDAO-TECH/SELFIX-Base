@@ -1,0 +1,12 @@
+{
+  "tier": "homeguard",
+  "modules": {
+    "antivirus": false,
+    "vpn": false,
+    "rollback": "1_day",
+    "vault": false,
+    "seeder": false
+  },
+  "valid_until": "2026-01-01",
+  "signature": "sha256:e7b0d8a546f26b88a8a6f5f0a9c3f6c25cb37d647f56df9b71be3b7b44586a03"
+}
